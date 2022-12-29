@@ -1,10 +1,10 @@
 pipeline {
     agent any 
-    tools {
-        maven,
-        gradle,
-        jdk
-    }
+    // tools { external tools used and supported by jenkins
+    //     maven,
+    //     gradle,
+    //     jdk
+    // }
     environment {
         NEW_VERSION = '1.3.0' //calculated or extracted
         //SERVER_CREDENTIALS = credentials('github-ayslan') GLOBAL
