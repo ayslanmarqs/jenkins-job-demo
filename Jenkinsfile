@@ -1,5 +1,10 @@
 pipeline {
     agent any 
+    tools {
+        maven,
+        gradle,
+        jdk
+    }
     environment {
         NEW_VERSION = '1.3.0' //calculated or extracted
         //SERVER_CREDENTIALS = credentials('github-ayslan') GLOBAL
@@ -24,11 +29,14 @@ pipeline {
         stage("deploy") {
             steps {
                 echo 'deploying the application...'
-                withCredentials([
-                    usernamePassword(credentials: 'github-ayslan', usernameVarible: USER, passwordVariable: PWD)
-                ]) {
-                    echo "some script ${USER} ${PWD}"
+                script {
+                    withCredentials([
+                        usernamePassword(credentialsId: 'github-ayslan', usernameVariable: GIT_USER, passwordVariable: GIT_PWD)
+                    ]) {
+                        
+                    }
                 }
+                echo "some script ${env.GIT_USER} ${env.GIT_PWD}"
                 //echo "deploying with ${SERVER_CREDENTIALS}"
             }
         }
